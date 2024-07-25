@@ -85,8 +85,56 @@ guillaume@ubuntu:~/0x00$ ./0-main.py
 [1,3,3,1]
 [1,4,6,4,1]
 guillaume@ubuntu:~/0x00$ 
-Repo:
 
-GitHub repository: alx-interview
-Directory: 0x00-pascal_triangle
-File: 0-pascal_triangle.py
+
+
+### Plan
+
+1. **Define the function `pascal_triangle(n)`**:
+    - Check if `n` is less than or equal to 0, return an empty list.
+    - Initialize an empty list `triangle` to store the rows of Pascal's Triangle.
+2. **Generate Pascal's Triangle**:
+    - Use a loop to generate each row up to `n`.
+    - For each row, initialize the first element as 1.
+    - Use a nested loop to calculate the intermediate values based on the previous row.
+    - Append the row to the `triangle` list.
+3. **Return the `triangle` list**.
+
+### Code
+
+```python
+def pascal_triangle(n):
+    if n <= 0:
+        return []
+
+    triangle = []
+
+    for i in range(n):
+        row = [1] * (i + 1)
+        for j in range(1, i):
+            row[j] = triangle[i - 1][j - 1] + triangle[i - 1][j]
+        triangle.append(row)
+
+    return triangle
+
+# Test the function with the provided main script
+if __name__ == "__main__":
+    def print_triangle(triangle):
+        for row in triangle:
+            print("[{}]".format(",".join([str(x) for x in row])))
+
+    print_triangle(pascal_triangle(5))
+```
+
+### Explanation
+
+- **Function Definition**: The function `pascal_triangle(n)` is defined to take an integer `n` as input.
+- **Base Case**: If `n` is less than or equal to 0, an empty list is returned.
+- **Triangle Initialization**: An empty list `triangle` is initialized to store the rows.
+- **Row Generation**: A loop runs from 0 to `n-1` to generate each row.
+  - Each row starts with 1.
+  - A nested loop calculates the intermediate values by summing the appropriate elements from the previous row.
+  - The row is appended to the `triangle` list.
+- **Return**: The complete Pascal's Triangle is returned as a list of lists.
+
+This code will generate Pascal's Triangle up to the `n`th row and print it in the specified format.
